@@ -1,0 +1,111 @@
+# Configuración general
+general:
+  debug: true
+  timezone: "UTC"
+  log_level: "INFO"
+
+# Base de datos
+database:
+  url: "sqlite:///data/fanpage_automation.db"
+  # Para PostgreSQL:
+  # url: "postgresql://user:password@localhost:5432/fanpage_db"
+
+# Configuración del scheduler
+scheduler:
+  interval: 300  # segundos entre verificaciones
+  max_retries: 3
+  retry_delay: 60  # segundos de espera entre reintentos
+
+# Configuración de API REST
+api:
+  host: "localhost"
+  port: 8000
+  secret_key: "change-this-secret-key-in-production"
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+
+# Configuración de plataformas
+platforms:
+  facebook:
+    enabled: false
+    app_id: ""
+    app_secret: ""
+    access_token: ""
+    page_id: ""  # opcional, para páginas específicas
+    
+  instagram:
+    enabled: false
+    username: ""
+    password: ""
+    session_file: "data/instagram_session.json"
+    
+  twitter:
+    enabled: false
+    api_key: ""
+    api_secret: ""
+    access_token: ""
+    access_token_secret: ""
+    bearer_token: ""  # opcional
+
+# Configuración de contenido
+content:
+  media_upload_path: "data/media/"
+  templates_path: "data/templates/"
+  max_file_size: 52428800  # 50MB
+  allowed_extensions:
+    - ".jpg"
+    - ".jpeg"
+    - ".png"
+    - ".gif"
+    - ".mp4"
+    - ".mov"
+
+# Configuración de logging
+logging:
+  file: "logs/fanpage_automation.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Configuración de automatización
+automation:
+  auto_reply:
+    enabled: false
+    patterns:
+      "\\b(gracias|thank you|thanks)\\b": "¡De nada! 😊 ¡Gracias por seguirnos!"
+      "\\b(hola|hello|hi)\\b": "¡Hola! 👋 ¡Bienvenido/a a nuestra página!"
+      "\\b(precio|price|costo|cost)\\b": "Te enviaremos información sobre precios por mensaje privado 📩"
+    private_messages:
+      enabled: false
+      
+  interactions:
+    process_comments: true
+    process_messages: false
+    sentiment_analysis: true
+    auto_moderate: false
+
+# Configuración de notificaciones
+notifications:
+  email:
+    enabled: false
+    smtp_server: ""
+    smtp_port: 587
+    username: ""
+    password: ""
+    recipients: []
+  
+  slack:
+    enabled: false
+    webhook_url: ""
+    
+  discord:
+    enabled: false
+    webhook_url: ""
+
+# Configuración de métricas
+metrics:
+  collection_interval: 3600  # cada hora
+  retention_days: 90
+  export_format: "json"
+  dashboard_enabled: false

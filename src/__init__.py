@@ -1,0 +1,1 @@
+"""Módulo core del Fanpage Automation Suite"""

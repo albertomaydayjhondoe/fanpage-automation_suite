@@ -5,7 +5,6 @@ Programador de tareas
 import asyncio
 from typing import Dict, List, Any, Callable, Optional
 from datetime import datetime, timedelta
-import schedule
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.date import DateTrigger

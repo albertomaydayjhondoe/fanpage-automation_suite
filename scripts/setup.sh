@@ -19,23 +19,26 @@ if [ ! -f ".env" ]; then
 fi
 
 # Crear entorno virtual si no existe
-if [ ! -d "venv" ]; then
+if [ ! -d ".venv" ]; then
     echo "🐍 Creando entorno virtual..."
-    python3 -m venv venv
+    python3 -m venv .venv
 fi
 
 # Activar entorno virtual
 echo "🔧 Activando entorno virtual..."
-source venv/bin/activate
+source .venv/bin/activate
+
+# Actualizar pip
+echo "⬆️ Actualizando pip..."
+.venv/bin/python -m pip install --upgrade pip
 
 # Instalar dependencias
 echo "📦 Instalando dependencias..."
-pip install --upgrade pip
-pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements.txt
 
 # Verificar instalación
 echo "✅ Verificando instalación..."
-python -c "import src; print('✅ Módulos principales importados correctamente')"
+.venv/bin/python verify_setup.py
 
 echo ""
 echo "🎉 ¡Configuración completada!"
@@ -44,7 +47,7 @@ echo "📋 Próximos pasos:"
 echo "1. Editar el archivo .env con tus credenciales de redes sociales"
 echo "2. Revisar la configuración en config/config.yaml"
 echo "3. Ejecutar la aplicación:"
-echo "   source venv/bin/activate"
+echo "   source .venv/bin/activate"
 echo "   python main.py --mode scheduler"
 echo ""
 echo "📚 Modos disponibles:"
